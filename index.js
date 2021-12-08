@@ -5,6 +5,7 @@ try {
   const nameToGreet = core.getInput("my-username");
   console.log(`Hello ${nameToGreet}`);
   const time = new Date().toTimeString();
+  console.log(time);
   core.setOutput(time);
 
   const payload = JSON.stringify(github.context.payload, undefined, 2);
