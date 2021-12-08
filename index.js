@@ -1,5 +1,4 @@
 const core = require("@actions/core");
-const github = require("@actions/github");
 const axios = require("axios");
 
 const lightsPerAxis = 4;
@@ -13,7 +12,7 @@ let issueLights = 0;
 let pullrequestLights = 0;
 let codereviewLights = 0;
 
-const response = {
+const axisValues = {
   commitAxis: commitLights,
   issueAxis: issueLights,
   pullrequestAxis: pullrequestLights,
@@ -71,29 +70,21 @@ const getRatio = (commits, issues, pullrequests, codereviews) => {
   pullrequestLights = Math.ceil((pullrequests / total) * lightsPerAxis);
   codereviewLights = Math.ceil((codereviews / total) * lightsPerAxis);
 
-  response.commitAxis = commitLights;
-  response.issueAxis = issueLights;
-  response.pullrequestAxis = pullrequestLights;
-  response.codereviewAxis = codereviewLights;
+  axisValues.commitAxis = commitLights;
+  axisValues.issueAxis = issueLights;
+  axisValues.pullrequestAxis = pullrequestLights;
+  axisValues.codereviewAxis = codereviewLights;
 };
 
-try {
-  const username = core.getInput("my-username");
-  console.log(`Hello ${username}`);
-  const time = new Date().toTimeString();
-  console.log(time);
-  core.setOutput("time", time);
+const username = core.getInput("my-username");
+console.log(`Hello ${username}`);
 
-  const GITHUB_TOKEN = core.getInput("GITHUB_TOKEN");
-
-  getUserData(username, GITHUB_TOKEN)
-    .then(() => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-} catch (error) {
-  // console.log(error);
-  core.setFailed(error.message);
-}
+const GITHUB_TOKEN = core.getInput("GITHUB_TOKEN");
+getUserData(username, GITHUB_TOKEN)
+  .then(() => {
+    core.setOutput("axisValues", axisValues);
+    console.log(axisValues);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

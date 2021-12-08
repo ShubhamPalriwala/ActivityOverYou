@@ -7,8 +7,8 @@ inputs:
   GITHUB_TOKEN:
     required: true
 outputs:
-  time:
-    description: "Time we greeted you"
+  axisValues:
+    description: "Number of lights to be lightened for each axis"
 
 runs:
   using: "node12"
