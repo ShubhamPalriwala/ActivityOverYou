@@ -1,0 +1,16 @@
+on:
+  push:
+    branches:
+      - "used-actions"
+
+jobs:
+  logLatestRelease:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: getusereventdata
+        with:
+          route: GET /repos/kyverno/kyverno/releases/latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo latest release: ${{ steps.getusereventdata.outputs.data }}"
