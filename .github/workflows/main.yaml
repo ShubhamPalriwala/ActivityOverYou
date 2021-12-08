@@ -13,8 +13,8 @@ jobs:
         id: hello
         uses: ./
         with:
-          my-username: "ShubhamActionBoy"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          my-username: "shubhampalriwala"
+          GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Get the output line
         run: echo "The time was ${{ steps.hello.outputs.time }}"
 

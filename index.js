@@ -21,9 +21,11 @@ const response = {
 };
 
 const getUserData = async (username, ghToken) => {
+  console.log(username);
+  console.log(ghToken);
   const response = await axios({
     method: "get",
-    url: `https://api.github.com/users/shubhampalriwala/events`,
+    url: `https://api.github.com/users/${username}/events`,
     headers: {
       Authorization: `Bearer ${ghToken}`,
     },
