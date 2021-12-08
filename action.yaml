@@ -1,10 +1,11 @@
-name: Hello Username
+name: ActivityOverYou
 inputs:
   my-username:
     description: Please enter your username
     required: true
     default: "ShubhamPalriwala"
   GITHUB_TOKEN:
+    description: Please enter your Personal Access Token which has access to the private repositories
     required: true
 outputs:
   axisValues:

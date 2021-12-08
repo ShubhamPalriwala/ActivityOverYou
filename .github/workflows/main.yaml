@@ -4,7 +4,7 @@ on:
       - "test"
 
 jobs:
-  greet-me:
+  calculate-lights:
     runs-on: ubuntu-latest
     name: View your Activity Graph over you
     steps:
