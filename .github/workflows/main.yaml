@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - "test"
+
+jobs:
+  greet-me:
+    runs-on: ubuntu-latest
+    name: Greet yourself hello
+    steps:
+      - uses: actions/checkout@v2
+      - name: Call the hello action
+        id: hello
+        uses: ./
+        with:
+          my-username: "ShubhamActionBoy"
+      - name: Get the output line
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
