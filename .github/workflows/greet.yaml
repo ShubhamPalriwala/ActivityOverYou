@@ -1,0 +1,4 @@
+on:
+  branches:
+    - "test"
+

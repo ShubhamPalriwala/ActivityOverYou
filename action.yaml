@@ -1,0 +1,13 @@
+name: Hello Username
+inputs:
+  my-username:
+    description: Please enter your username
+    required: true
+    default: "ShubhamPalriwala"
+outputs:
+  time:
+    description: "Time we greeted you"
+
+runs:
+  using: "node12"
+  main: "index.js"
