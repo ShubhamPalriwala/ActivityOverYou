@@ -4,6 +4,9 @@ inputs:
     description: Please enter your username
     required: true
     default: "ShubhamPalriwala"
+secrets:
+  GITHUB_TOKEN:
+    required: true
 outputs:
   time:
     description: "Time we greeted you"
