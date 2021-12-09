@@ -1,7 +1,4 @@
-on:
-  push:
-    branches:
-      - "test"
+on: [push]
 
 jobs:
   calculate-lights:

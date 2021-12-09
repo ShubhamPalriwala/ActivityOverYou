@@ -1,22 +1,16 @@
 const core = require("@actions/core");
 const axios = require("axios");
 
-const lightsPerAxis = 4;
 let commits = 0;
 let issues = 0;
 let pullrequests = 0;
 let codereviews = 0;
 
-let commitLights = 0;
-let issueLights = 0;
-let pullrequestLights = 0;
-let codereviewLights = 0;
-
 const axisValues = {
-  commitAxis: commitLights,
-  issueAxis: issueLights,
-  pullrequestAxis: pullrequestLights,
-  codereviewAxis: codereviewLights,
+  commitAxis: 0,
+  issueAxis: 0,
+  pullrequestAxis: 0,
+  codereviewAxis: 0,
 };
 
 const getUserData = async (username, ghToken) => {
@@ -62,24 +56,18 @@ const incrementType = (ghEvent) => {
 };
 
 const getRatio = (commits, issues, pullrequests, codereviews) => {
-  console.log(commits, issues, pullrequests, codereviews);
   const total = commits + issues + pullrequests + codereviews;
 
-  commitLights = Math.ceil((commits / total) * lightsPerAxis);
-  issueLights = Math.ceil((issues / total) * lightsPerAxis);
-  pullrequestLights = Math.ceil((pullrequests / total) * lightsPerAxis);
-  codereviewLights = Math.ceil((codereviews / total) * lightsPerAxis);
-
-  axisValues.commitAxis = commitLights;
-  axisValues.issueAxis = issueLights;
-  axisValues.pullrequestAxis = pullrequestLights;
-  axisValues.codereviewAxis = codereviewLights;
+  axisValues.commitAxis = (commits / total) * 100;
+  axisValues.issueAxis = (issues / total) * 100;
+  axisValues.pullrequestAxis = (pullrequests / total) * 100;
+  axisValues.codereviewAxis = (codereviews / total) * 100;
 };
 
 const username = core.getInput("my-username");
-console.log(`Hello ${username}`);
 
 const GITHUB_TOKEN = core.getInput("GITHUB_TOKEN");
+
 getUserData(username, GITHUB_TOKEN)
   .then(() => {
     core.setOutput("axisValues", axisValues);
