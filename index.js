@@ -58,10 +58,10 @@ const incrementType = (ghEvent) => {
 const getRatio = (commits, issues, pullrequests, codereviews) => {
   const total = commits + issues + pullrequests + codereviews;
 
-  axisValues.commitAxis = (commits / total) * 100;
-  axisValues.issueAxis = (issues / total) * 100;
-  axisValues.pullrequestAxis = (pullrequests / total) * 100;
-  axisValues.codereviewAxis = (codereviews / total) * 100;
+  axisValues.commitAxis = Math.ceil((commits / total) * 100);
+  axisValues.issueAxis = Math.ceil((issues / total) * 100);
+  axisValues.pullrequestAxis = Math.ceil((pullrequests / total) * 100);
+  axisValues.codereviewAxis = Math.ceil((codereviews / total) * 100);
 };
 
 const username = core.getInput("my-username");
