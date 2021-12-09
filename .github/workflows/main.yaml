@@ -1,0 +1,16 @@
+on: [push]
+
+jobs:
+  calculate-lights:
+    runs-on: ubuntu-latest
+    name: View your Activity Graph over you
+    steps:
+      - uses: actions/checkout@v2
+      - name: Calculate the lights
+        id: lightFunction
+        uses: ./
+        with:
+          my-username: "shubhampalriwala"
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+      - name: Get the Light values
+        run: echo "The Values are ${{ steps.lightFunction.outputs.axisValues }}"
