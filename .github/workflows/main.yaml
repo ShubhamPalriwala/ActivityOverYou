@@ -4,6 +4,8 @@ jobs:
   calculate-lights:
     runs-on: ubuntu-latest
     name: View your Activity Graph over you
+    outputs: 
+      axisValues: ${{ steps.lightFunction.outputs.axisValues }}
     steps:
       - uses: actions/checkout@v2
       - name: Calculate the lights
@@ -12,5 +14,21 @@ jobs:
         with:
           my-username: "shubhampalriwala"
           GITHUB_TOKEN: ${{ secrets.PAT }}
+
       - name: Get the Light values
         run: echo "The Values are ${{ steps.lightFunction.outputs.axisValues }}"
+
+  send-values-to-mqtt:
+    name: Publish Opening of PR to mqtt broker
+    needs: [calculate-lights]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: juhrlass/mqtt-action@master
+        with:
+          protocol : mqtt
+          host: io.adafruit.com
+          port: 1883
+          topic: "himanshushah/feeds/getdata"
+          message: ${{ needs.calculate-lights.outputs.axisValues }}
+          username: "himanshushah"
+          password: ${{ secrets.MQTT_BROKER_PASSWORD }}
