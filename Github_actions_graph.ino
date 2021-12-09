@@ -23,13 +23,13 @@ Adafruit_SH1106G display = Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, 
 StaticJsonBuffer<200> jsonBuffer;
 
 
-#define WLAN_SSID       "home"
-#define WLAN_PASS       "home1234"
+#define WLAN_SSID       "your_ssid"
+#define WLAN_PASS       "your_password"
 
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
-#define AIO_USERNAME    "himanshushah"
-#define AIO_KEY         "aio_zpIV8339kXy2OLeiSJ6OhpkXOZPs"
+#define AIO_USERNAME    "your_username"
+#define AIO_KEY         "your_key"
 
 WiFiClient client;
 Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_USERNAME, AIO_KEY);
