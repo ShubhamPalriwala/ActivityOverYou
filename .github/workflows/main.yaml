@@ -1,4 +1,7 @@
-on: [push]
+name: View your Acitvity Overview in your palms
+on:
+  schedule:
+    cron: "30 3 * * *"
 
 jobs:
   calculate-lights:
